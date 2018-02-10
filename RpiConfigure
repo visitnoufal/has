@@ -1,0 +1,40 @@
+1. Add the following content to /etc/network/interfaces.d/ap
+
+allow-hotplug uap0
+auto uap0
+iface uap0 inet static
+    address 10.1.1.1
+    netmask 255.255.255.0
+
+
+2. Add the following content to /etc/network/interfaces.d/station
+
+allow-hotplug wlan0
+iface wlan0 inet manual
+    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+   
+3. Add the following content to /etc/udev/rules.d/90-wireless.rules
+
+ACTION=="add", SUBSYSTEM=="ieee80211", KERNEL=="phy0", RUN+="/sbin/iw phy %k interface add uap0 type __ap"
+
+4. Execute following command
+
+rm -f /lib/dhcpcd/dhcpcd-hooks/10-wpa_supplicant
+
+5. Add following content to /etc/wpa_supplicant/wpa_supplicant.conf (router SSID & PWD need to pass as command line argument of shell script)
+
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+country=GB
+
+network={
+    ssid="$1"
+    scan_ssid=1
+    psk="$2"
+    key_mgmt=WPA-PSK
+}
+
+6. Execute the following commands
+
+systemctl restart dhcpcd
+ifup wlan0
+ 
