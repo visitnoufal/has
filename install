@@ -1,2 +1,6 @@
 apt-get update
 apt-get install -y hostapd dnsmasq iptables-persistent
+apt-get install -y mosquitto mosquitto-clients
+curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+apt-get -y install nodejs
+npm install express --save
