@@ -21,7 +21,7 @@ network={ssid=\"$1\"
     psk=\"$2\"
     key_mgmt=WPA-PSK}" | sudo tee /etc/wpa_supplicant/wpa_supplicant.conf
 
-
+ifdown wlan0
 systemctl restart dhcpcd
 ifup wlan0
 /sbin/iw phy phy0 interface add uap0 type __ap
