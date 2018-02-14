@@ -24,4 +24,3 @@ network={ssid=\"$1\"
 ifdown wlan0
 systemctl restart dhcpcd
 ifup wlan0
-/sbin/iw phy phy0 interface add uap0 type __ap
