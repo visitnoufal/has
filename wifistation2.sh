@@ -19,7 +19,7 @@ country=GB
 network={ssid=\"$1\"
     scan_ssid=1
     psk=\"$2\"
-    key_mgmt=WPA-PSK}" | sudo tee -a wpa_supplicant.conf
+    key_mgmt=WPA-PSK}" | sudo tee /etc/wpa_supplicant/wpa_supplicant.conf
 
 
 systemctl restart dhcpcd
