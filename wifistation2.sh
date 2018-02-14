@@ -13,14 +13,13 @@ iface wlan0 inet manual
 
 rm -f /lib/dhcpcd/dhcpcd-hooks/10-wpa_supplicant
 
-    echo "ctrl_interface=DIR=/var/run/wpa_supplicant 
-GROUP=netdev
+sudo sh -c 'echo "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 country=GB
+
 network={ssid=\"$1\"
     scan_ssid=1
     psk=\"$2\"
-    key_mgmt=WPA-PSK}" | sudo tee /etc/wpa_supplicant/wpa_supplicant.conf
+    key_mgmt=WPA-PSK}" > /etc/wpa_supplicant/wpa_supplicant.conf'
 
-ifdown wlan0
 systemctl restart dhcpcd
 ifup wlan0
