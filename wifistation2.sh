@@ -16,10 +16,12 @@ rm -f /lib/dhcpcd/dhcpcd-hooks/10-wpa_supplicant
 sudo sh -c 'echo "country=GB
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
-network={ssid=\"$1\"
-    scan_ssid=1
-    psk=\"$2\"
-    key_mgmt=WPA-PSK}" > /etc/wpa_supplicant/wpa_supplicant.conf'
+network={
+        ssid=\"$1\"
+        scan_ssid=1
+        psk=\"$2\"
+        key_mgmt=WPA-PSK
+}" > /etc/wpa_supplicant/wpa_supplicant.conf'
 
 systemctl restart dhcpcd
 ifup wlan0
