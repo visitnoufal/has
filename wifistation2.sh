@@ -13,9 +13,9 @@ iface wlan0 inet manual
 
 rm -f /lib/dhcpcd/dhcpcd-hooks/10-wpa_supplicant
 
-sudo sh -c 'echo "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-country=GB
-
+sudo sh -c 'echo "country=GB
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
 network={ssid=\"$1\"
     scan_ssid=1
     psk=\"$2\"
